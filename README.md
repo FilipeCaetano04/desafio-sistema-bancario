@@ -1,1 +1,1 @@
-# desafio-sistema-banc-rio
+# desafio-sistema-bancario
