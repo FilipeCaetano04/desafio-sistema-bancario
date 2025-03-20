@@ -28,25 +28,28 @@ while True:
     
     elif opc == 's':
 
-        if numero_saques < LIMITE_SAQUE:
-            saque = float(input('Valor a ser sacado: '))
-
-            if saque <= saldo:
-
-                if saque <= limite:
-
-                    if saque > 0:
-                        saldo -= saque
-                        extrato += f'Saque de R$ {saque:.2f}\n'
-                        numero_saques += 1
-                    else:
-                        print('Saque não realizado! Valor de saque negativo!')
-                else:
-                    print('Saque não realizado! Valor excedeu o limite!')
-            else:
-               print('Saque não realizado! Saldo insuficiente!') 
-        else:
+        # Verifica se ainda é possível fazer saques
+        # Se não for, volta para o menu
+        if numero_saques >= LIMITE_SAQUE:
             print('Saque não realizado! Número máximo de saques excedido!')
+            continue
+        
+        # Pede o valor a ser sacado após a verificação
+        saque = float(input('Valor a ser sacado: '))
+
+        if saque > saldo:
+            print('Saque não realizado! Saldo insuficiente!') 
+
+        elif saque > limite:
+            print('Saque não realizado! Valor excedeu o limite!')
+
+        elif saque <= 0:
+            print('Saque não realizado! Valor de saque incongruente!')
+        else:
+            # Lógica do saque após verificar as condições necessárias para efetua-lo
+            saldo -= saque
+            extrato += f'Saque de R$ {saque:.2f}\n'
+            numero_saques += 1
         
     elif opc == 'e':
         print(' EXTRATO '.center(40, '='))
